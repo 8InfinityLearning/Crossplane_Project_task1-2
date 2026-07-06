@@ -1,0 +1,33 @@
+apiVersion: apiextensions.crossplane.io/v1 # 
+kind: CompositeResourceDefinition
+metadata:
+  name: xconfigmapv3s.demo.crossplane.io
+spec:
+  group: demo.crossplane.io
+  names:
+    kind: XConfigMapV3
+    plural: xconfigmapv3s
+  scope: LegacyCluster # 
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    message:
+                      type: string
+                  required:
+                    - name
+                    - message
+              required:
+                - parameters

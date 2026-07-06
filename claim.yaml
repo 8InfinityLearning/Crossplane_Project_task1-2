@@ -1,0 +1,8 @@
+apiVersion: demo.crossplane.io/v1alpha1
+kind: XConfigMapV3
+metadata:
+  name: my-first-configmap
+spec:
+  parameters:
+    name: dynamic-crossplane-configmap
+    message: "Hello from the successfull working Crossplane configuration!"
