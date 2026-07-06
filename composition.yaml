@@ -37,4 +37,4 @@ spec:
           - fromFieldPath: spec.parameters.name
             toFieldPath: spec.forProvider.manifest.metadata.name
           - fromFieldPath: spec.parameters.message
-            toFieldPath: spec.forProvider.manifest.data.message
+            toFieldPath: spec.forProvider.manifest.data.message 
