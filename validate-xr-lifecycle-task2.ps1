@@ -10,18 +10,12 @@ $PollIntervalSec   = 10                                 # Poll loop step duratio
 $TimeoutMinutes    = 5                                  # Maximum safety window limits of 5 sec
 $ReportFilePath    = "xr-validation-report.txt"         # Validation output log path as Text File
 
-# ===============================================================================
-# <--- Declaration of Calculations and Initializer Blocks --->
-# ================================================================================
+
 $MaxAttempts = ($TimeoutMinutes * 60) / $PollIntervalSec
 $Attempt = 1
 $PassedStatus = $false
 $StartTime = Get-Date
 
-Clear-Host
-Write-Host "======================================================================" -ForegroundColor Cyan
-Write-Host " INITIALIZING CROSSPLANE AUTOMATED LIFECYCLE RECONCILIATION SCRIPT  " -ForegroundColor Cyan
-Write-Host "======================================================================" -ForegroundColor Cyan
 
 # --- Step 1: Manifest Deployment Execution ---
 if (-not (Test-Path $ManifestFile)) {
