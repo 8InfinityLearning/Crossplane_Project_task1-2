@@ -3,38 +3,37 @@ kind: Composition
 metadata:
   name: xconfigmap-v3-composition
   labels:
-    provider: kubernetes 
+    provider: kubernetes
 spec:
   compositeTypeRef:
     apiVersion: demo.crossplane.io/v1alpha1
     kind: XConfigMapV3
-  
   mode: Pipeline
   pipeline:
-  - step: patch-and-transform
-    functionRef:
-      name: function-patch-and-transform
-    input:
-      apiVersion: pt.fn.crossplane.io/v1beta1
-      kind: Resources
-      resources:
-      - name: target-configmap
-        base:
-          apiVersion: kubernetes.crossplane.io/v1alpha2
-          kind: Object
-          spec:
-            providerConfigRef:
-              name: default
-            forProvider:
-              manifest:
-                apiVersion: v1
-                kind: ConfigMap
-                metadata:
-                  namespace: default
-                data:
-                  message: ""
-        patches:
-          - fromFieldPath: spec.parameters.name
-            toFieldPath: spec.forProvider.manifest.metadata.name
-          - fromFieldPath: spec.parameters.message
-            toFieldPath: spec.forProvider.manifest.data.message 
+    - step: patch-and-transform
+      functionRef:
+        name: function-patch-and-transform
+      input: # Nested cleanly below
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: target-configmap
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              spec:
+                providerConfigRef:
+                  name: default
+                forProvider:
+                  manifest:
+                    apiVersion: v1
+                    kind: ConfigMap
+                    metadata:
+                      namespace: default
+                    data:
+                      message: ""
+            patches:
+              - fromFieldPath: spec.parameters.name
+                toFieldPath: spec.forProvider.manifest.metadata.name
+              - fromFieldPath: spec.parameters.message
+                toFieldPath: spec.forProvider.manifest.data.message

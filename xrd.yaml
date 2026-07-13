@@ -7,7 +7,7 @@ spec:
   names:
     kind: XConfigMapV3
     plural: xconfigmapv3s
-  scope: LegacyCluster # 
+  scope: Cluster #  Fixed from LegacyCluster
   versions:
     - name: v1alpha1
       served: true
